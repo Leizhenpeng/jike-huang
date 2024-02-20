@@ -51,7 +51,6 @@
     "open_in_tab": true
   },
   "action": {
-    "default_title": "黄吉吉 用户面板",
-    "default_popup": "pages/popup.html"
+ 
   }
 }

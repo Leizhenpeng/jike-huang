@@ -1,0 +1,19 @@
+node_modules
+/dist
+.DS_Store
+.pnpm-debug.log*
+*.tsbuildinfo
+*.zip
+
+/src/user-scripts/style.ts
+
+# 由工具编译的产物
+/build*
+/extension/css/*
+/extension/scripts/*
+!/extension/scripts/jquery.min.js
+!/extension/scripts/polyfill.js
+
+# web-ext 产生的浏览器配置
+/*-profile
+/.idea

@@ -1,0 +1,193 @@
+@mixin line-clamp($lines: 1, $line-height: 1.4) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  line-height: $line-height;
+}
+
+@mixin common-button() {
+  position: relative;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  color: var(--button-foreground-color);
+  font-weight: 500;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 28px;
+  white-space: nowrap;
+  text-shadow: none;
+  background: var(--button-background-color);
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  box-shadow:
+    0 1.8px 0 var(--box-background-hover-color),
+    0 1.8px 0 var(--button-background-color);
+  cursor: pointer;
+  transition:
+    color 0.25s,
+    background-color 0.25s,
+    box-shadow 0.25s;
+  user-select: none;
+
+  &:is(:hover:enabled, :active:enabled) {
+    color: var(--button-foreground-hover-color);
+    font-weight: 500;
+    text-shadow: none;
+    background: var(--button-hover-color);
+    border: none;
+    box-shadow: var(--button-hover-shadow);
+  }
+
+  &:is(.hover_now, .disable_now) {
+    color: var(--button-foreground-color) !important;
+    text-shadow: none !important;
+    background: var(--button-background-color) !important;
+    border: none !important;
+    box-shadow:
+      0 1.8px 0 var(--box-background-hover-color) !important,
+      0 1.8px 0 var(--button-background-color) !important;
+  }
+
+  &:is(.disable_now, :disabled) {
+    color: var(--button-foreground-color);
+    font-weight: 500;
+    text-shadow: none;
+    background: var(--button-background-color);
+    box-shadow:
+      0 1.8px 0 var(--box-background-hover-color),
+      0 1.8px 0 var(--button-background-color);
+    cursor: default;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  kbd {
+    position: relative;
+    right: -4px;
+    padding: 0 3px;
+    font-size: 90%;
+    font-family: inherit;
+    line-height: initial;
+    border: 1px solid var(--button-border-color);
+    border-radius: 4px;
+  }
+}
+
+@mixin hover-button {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  background: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.2s;
+  user-select: none;
+
+  &::before {
+    position: absolute;
+    inset: 0 -5px;
+    z-index: -1;
+    background-color: var(--v2p-color-bg-hover-btn);
+    border-radius: 5px;
+    transform: scale(0.65);
+    opacity: 0;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      transform 0.2s,
+      opacity 0.2s;
+    content: '';
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @content;
+}
+
+@mixin input($minHeight: unset, $maxHeight: 800px) {
+  height: unset;
+  min-height: $minHeight !important;
+  max-height: $maxHeight !important;
+  overflow: hidden;
+  color: currentColor;
+  font-size: 15px;
+  background-color: var(--v2p-color-bg-input);
+  border: 1px solid var(--button-border-color);
+  border-radius: 8px;
+  transition: opacity 0.25s;
+  resize: none;
+
+  @content;
+
+  &::placeholder {
+    color: var(--v2p-color-main-500);
+    font-size: 15px;
+  }
+
+  &:is(:focus, :focus-within) {
+    background-color: transparent;
+    outline: none;
+    box-shadow: 0 0 0 1px var(--button-border-color);
+  }
+}
+
+@mixin tooltip {
+  z-index: var(--zidx-tip);
+  width: max-content;
+  min-width: 30px;
+  padding: 2px 5px;
+  overflow: hidden;
+  color: var(--v2p-color-foreground);
+  font-size: 12px;
+  white-space: nowrap;
+  text-align: center;
+  background-color: var(--v2p-color-bg-tooltip);
+  border-radius: 4px;
+  box-shadow: var(--v2p-widget-shadow);
+  pointer-events: none;
+}
+
+@mixin link {
+  text-decoration: underline 1.5px;
+  text-underline-offset: 0.46ex;
+}
+
+@mixin popup {
+  font-size: 14px;
+  background: var(--v2p-color-bg-widget);
+  border: 1px solid var(--box-border-color);
+  border-radius: 8px;
+  box-shadow: var(--v2p-widget-shadow);
+  backdrop-filter: blur(16px);
+}
+
+@mixin underline-text {
+  text-decoration: underline 1px;
+  text-underline-offset: var(--v2p-underline-offset);
+}
+
+@mixin select-box {
+  color: var(--v2p-color-foreground);
+  background-color: var(--v2p-color-background);
+  border: 1px solid var(--v2p-color-border);
+  border-radius: 4px;
+}
+
+@mixin text-content {
+  font-size: 15px;
+  line-height: 1.6;
+}

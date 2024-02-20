@@ -1,0 +1,363 @@
+:root {
+  --zidx-serach: 100;
+  --zidx-tabs: 10;
+  --zidx-tools-card: 10;
+  --zidx-reply-box: 99;
+  --zidx-model-header: 50;
+  --zidx-model-mask: 888;
+  --zidx-toast: 999;
+  --zidx-tip: 10;
+  --zidx-popup: 99;
+  --zidx-expand-mask: 10;
+  --zidx-expand-btn: 20;
+  --jike-underline-offset: 0.5ex;
+  --jike-layout-column-gap: 25px;
+  --jike-layout-row-gap: 20px;
+
+
+  // jike原来的样式
+  --message-hover: #f7f7f7;
+  --bg-web-body-1: #f9f9f9;
+  --bg-web-body-1_hover: #f4f4f4;
+  --web-mask: #00000080;
+  --web-icon-gray_hover: #717171;
+  --solid-white-1: #fff;
+  --solid-white-2: #ffffffcc;
+  --solid-white-3: #ffffff80;
+  --solid-gray-1: #dbdbdb;
+  --solid-gray-2: #bfbfbf;
+  --solid-gray-3: grey;
+  --solid-bg-primary-1: #1a1a1a;
+  --solid-gray-4: #333;
+  --solid-label-contributor: #d1823ab3;
+  --solid-label-male: #03a9f4b3;
+  --solid-label-female: #fc689db3;
+  --solid-separator: #ffffff33;
+  --solid-bg-secondary-highlight: #ffffff1a;
+  --solid-bg-story-white: #ffffffe6;
+  --solid-bg-story-black: #000000e6;
+  --solid-bg-story-red: #e4583ee6;
+  --solid-bg-story-yellow: #ffe411e6;
+  --solid-bg-story-green: #1baf5de6;
+  --solid-bg-story-blue: #03a9f4e6;
+  --solid-bg-story-purple: #572285e6;
+  --solid-bg-black-transparent: #00000026;
+  --tint-icon-gray: #999;
+  --tint-orange: #ffd001;
+  --tint-jike-blue: #03a9f4;
+  --tint-success: #1baf5d;
+  --tint-warming: #e4583e;
+  --tint-border: #0000000d;
+  --tint-placeholder: #dbdbdb;
+  --tint-separator: #dbdbdb;
+  --tint-separator-2: #dbdbdb;
+  --tint-primary: #333;
+  --tint-secondary: grey;
+  --tint-tertiary: #bfbfbf;
+  --bg-jike-yellow: #ffe411;
+  --bg-jike-blue: #03a9f4;
+  --bg-jike-live: #e4583e26;
+  --bg-selected-blue: #03a9f41a;
+  --bg-popover: #1a1a1ad9;
+  --bg-overlay: #0000004d;
+  --bg-body-base-1: #fff;
+  --bg-body-base-2: #f0f3f5;
+  --bg-body-1: #fff;
+  --bg-body-2: #fafafa;
+  --bg-on-body-1: #fff;
+  --bg-on-body-2: #f0f3f5;
+  --bg-mask: #0000004d;
+  --bg-surface-base-1: #fff;
+  --bg-warming: #e4583e;
+  --bg-surface-body-1: #f0f3f5;
+  --bg-surface-body-2: #fafafa;
+  --brand-000: #fff;
+  --brand-100: #fff6be;
+  --brand-200: #fff193;
+  --brand-300: #ffeb67;
+  --brand-400: #fee641;
+  --brand-500: #ffe411;
+  --brand-600: #fecb11;
+  --brand-700: #fcb803;
+  --brand-800: #fb9f00;
+  --brand-900: #f97200;
+  --gray-000: #fff;
+  --gray-100: #f4f4f4;
+  --gray-200: #ededed;
+  --gray-300: #dedede;
+  --gray-400: #bfbfbf;
+  --gray-500: #999;
+  --gray-600: #737373;
+  --gray-700: #5f5f5f;
+  --gray-800: #404040;
+  --gray-900: #1f1f1f;
+  --bg-100: #f8fafb;
+  --bg-200: #f2f5f8;
+  --bg-300: #e9eef2;
+  --blue-000: #fff;
+  --blue-100: #a0e3fe;
+  --blue-200: #81d4fb;
+  --blue-300: #4ec3f8;
+  --blue-400: #28b5f7;
+  --blue-500: #03a9f5;
+  --blue-600: #049ae6;
+  --blue-700: #0487d2;
+  --blue-800: #0476be;
+  --blue-900: #03569c;
+  --red: #e4583e;
+  --color-text: var(--gray-800);
+  --color-secondary-text: var(--gray-500);
+  --color-meta-text: var(--gray-500);
+  --color-highlight: var(--blue-100);
+  --color-primary: var(--blue-500);
+  --page-background: #eff3f6;
+  --card-press-shadow: 0px 1px 3px rgba(0, 0, 0, .2), 0px 1px 20px rgba(157, 182, 200, .1);
+  --profile-color: #fff;
+  --related-border: rgba(0, 0, 0, .05);
+  color: var(--jike-color-foreground);
+  font-family: system-ui, sans-serif;
+  background-color: var(--jike-color-background);
+
+  body {
+    // 基础色（参考自 TailwindCSS Slate）：
+    --jike-color-main-50: #f7f9fb;
+    --jike-color-main-100: #f1f5f9;
+    --jike-color-main-200: #e2e8f0;
+    --jike-color-main-300: #cbd5e1;
+    --jike-color-main-350: #94a3b8cc;
+    --jike-color-main-400: #94a3b8;
+    --jike-color-main-500: #64748b;
+    --jike-color-main-600: #475569;
+    --jike-color-main-700: #334155;
+    --jike-color-main-800: #1e293b;
+    --jike-color-accent-50: #ecfdf5;
+    --jike-color-accent-100: #d1fae5;
+    --jike-color-accent-200: #a7f3d0;
+    --jike-color-accent-300: #6ee7b7;
+    --jike-color-accent-400: #34d399;
+    --jike-color-accent-500: #10b981;
+    --jike-color-accent-600: #059669;
+    --jike-color-orange-50: #fff7ed;
+    --jike-color-orange-100: #ffedd5;
+    --jike-color-orange-400: #fb923c;
+
+    // 特别色：
+    --jike-color-background: #f2f3f5;
+    --jike-color-foreground: var(--jike-color-main-800);
+    --jike-color-font-secondary: var(--jike-color-main-500);
+    --jike-color-bg-content: #fff;
+    --jike-color-bg-footer: var(--jike-color-bg-content);
+    --jike-color-bg-hover-btn: var(--jike-color-main-200);
+    --jike-color-bg-subtle: rgb(236 253 245 / 90%);
+    --jike-color-bg-input: var(--jike-color-main-50);
+    --jike-color-bg-search: var(--jike-color-main-100);
+    --jike-color-bg-search-active: var(--jike-color-main-200);
+    --jike-color-bg-widget: rgb(255 255 255 / 70%);
+    --jike-color-bg-reply: var(--jike-color-main-100);
+    --jike-color-bg-tooltip: var(--jike-color-bg-content);
+    --jike-color-heart: #ef4444;
+    --jike-color-heart-fill: #fee2e2;
+    --jike-color-mask: rgb(0 0 0 / 25%);
+    --jike-color-divider: var(--jike-color-main-200);
+    --jike-color-border: var(--jike-color-main-200);
+    --jike-color-border-darker: var(--jike-color-main-300);
+    --jike-box-shadow: 0 3px 5px 0 rgb(0 0 0 / 4%);
+    --jike-widget-shadow: 0 9px 24px -3px rgb(0 0 0 / 6%), 0 4px 8px -1px rgb(0 0 0 /12%);
+    --jike-toast-shadow: 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%),
+    0 9px 28px 8px rgb(0 0 0 / 5%);
+    --jike-color-error: #ef4444;
+    --jike-color-bg-error: #fee2e2;
+
+    // JIKE 原有的 CSS 变量：
+    --color-fade: var(--jike-color-font-secondary);
+    --color-gray: var(--jike-color-font-secondary);
+    --link-color: var(--jike-color-foreground);
+    --link-darker-color: var(--jike-color-main-600);
+    --link-hover-color: var(--jike-color-foreground);
+    --link-caution-color: var(--jike-color-orange-400);
+    --box-border-color: var(--jike-color-border);
+    --box-foreground-color: var(--jike-color-foreground);
+    --box-background-color: var(--jike-color-bg-content);
+    --box-background-alt-color: var(--jike-color-main-100);
+    --box-background-hover-color: var(--jike-color-main-200);
+    --box-border-focus-color: var(--jike-color-main-200);
+    --box-border-radius: 10px;
+    --button-background-color: var(--jike-color-main-100);
+    --button-background-hover-color: var(--jike-color-main-200);
+    --button-hover-color: var(--button-background-hover-color);
+    --button-foreground-color: var(--jike-color-main-500);
+    --button-foreground-hover-color: var(--jike-color-main-600);
+    --button-border-color: var(--jike-color-main-300);
+    --button-border-hover-color: var(--jike-color-main-400);
+
+
+    #Logo {
+      background-image: url('https://www.JIKE.com/static/img/JIKE@2x.png');
+    }
+
+    ::selection {
+      color: var(--jike-color-main-100, #f1f5f9);
+      background-color: var(--jike-color-main-700, #334155);
+    }
+
+    img::selection {
+      background-color: var(--jike-color-main-500, #64748b);
+    }
+  }
+
+  @mixin dark-mode {
+    // 基础色：
+    --jike-color-main-50: unset;
+    --jike-color-main-100: #2d333b;
+    --jike-color-main-200: #374151;
+    --jike-color-main-300: #374151;
+    --jike-color-main-350: #6b7280cc;
+    --jike-color-main-400: #6b7280;
+    --jike-color-main-500: #9ca3af;
+    --jike-color-main-600: #9ca3af;
+    --jike-color-main-700: #d1d5db;
+    --jike-color-main-800: #e5e7eb;
+    --jike-color-main-900: #111827;
+    --jike-color-main-950: #030712;
+    --jike-color-accent-50: #064e3b;
+    --jike-color-accent-100: #065f46;
+    --jike-color-accent-200: #047857;
+    --jike-color-accent-300: #059669;
+    --jike-color-accent-400: #10b981;
+    --jike-color-accent-500: #34d399;
+    --jike-color-accent-600: #6ee7b7;
+    --jike-color-orange-50: #593600;
+    --jike-color-orange-100: #9a3412;
+    --jike-color-orange-400: #fbe090;
+
+    // 特别色：
+    --jike-color-background: #1c2128;
+    --jike-color-foreground: #adbac7;
+    --jike-color-font-secondary: var(--jike-color-main-600);
+    --jike-color-bg-content: #22272e;
+    --jike-color-bg-subtle: rgb(6 78 59 / 30%);
+    --jike-color-bg-input: var(--jike-color-background);
+    --jike-color-bg-search: var(--jike-color-main-100);
+    --jike-color-bg-search-active: var(--jike-color-main-200);
+    --jike-color-bg-widget: var(--jike-color-bg-content);
+    --jike-color-bg-reply: var(--jike-color-main-100);
+    --jike-color-bg-tooltip: var(--jike-color-main-100);
+    --jike-color-heart: #ef4444;
+    --jike-color-heart-fill: #fca5a5;
+    --jike-color-mask: rgb(99 110 123 / 40%);
+    --jike-color-border: #444c56;
+    --jike-color-border-darker: #444c56;
+    --jike-box-shadow: 0 0 0 1px var(--jike-color-border);
+    --jike-toast-shadow: none;
+
+    // JIKE 原有的 CSS 变量：
+    --link-color: var(--jike-color-foreground);
+    --box-background-color: var(--jike-color-bg-content);
+    --box-background-alt-color: var(--jike-color-main-100);
+    --box-background-hover-color: var(--jike-color-main-300);
+    --button-background-color: #373e47;
+    --button-background-hover-color: #444c56;
+    --button-hover-color: var(--button-background-hover-color);
+    --button-foreground-color: var(--jike-color-foreground);
+    --button-foreground-hover-color: var(--jike-color-foreground);
+    --button-border-color: var(--jike-color-border);
+    --button-border-hover-color: #768390;
+
+
+    // jike原来的样式
+    --tint-icon-gray: #999;
+    --tint-orange: #ffd001;
+    --tint-jike-blue: #03a9f4;
+    --tint-success: #1baf5d;
+    --tint-warming: #e4583e;
+    --tint-border: #ffffff1a;
+    --tint-placeholder: #333;
+    --tint-separator: #333;
+    --tint-separator-2: #4b4b4b;
+    --tint-primary: #dbdbdb;
+    --tint-secondary: #bfbfbf;
+    --tint-tertiary: grey;
+    --bg-jike-yellow: #ffd001;
+    --bg-jike-blue: #03a9f4;
+    --bg-jike-live: #e4583e4d;
+    --bg-selected-blue: #03a9f426;
+    --bg-popover: #4b4b4be6;
+    --bg-overlay: #00000080;
+    --bg-body-base-1: #0f0f0f;
+    --bg-body-base-2: #0f0f0f;
+    --bg-body-1: #1a1a1a;
+    --bg-body-2: #0f0f0f;
+    --bg-on-body-1: #333;
+    --bg-on-body-2: #262626;
+    --bg-mask: #00000080;
+    --bg-surface-base-1: #262626;
+    --bg-warming: #e4583e;
+    --bg-surface-body-1: #333;
+    --bg-surface-body-2: #333;
+    --bg-web-body-1: #171717;
+    --message-hover: #2b2b2d;
+    --bg-web-body-1_hover: #202020;
+    --web-mask: #0000008c;
+    --web-icon-gray_hover: #cecece;
+    --brand-900: #fff;
+    --brand-800: #fff6be;
+    --brand-700: #fff193;
+    --brand-600: #ffeb67;
+    --brand-500: #ffe411;
+    --brand-400: #ffe411;
+    --brand-300: #ffe411;
+    --brand-200: #fcb803;
+    --brand-100: #fb9f00;
+    --brand-000: #f97200;
+    --gray-900: #fff;
+    --gray-800: #f4f4f4;
+    --gray-700: #ededed;
+    --gray-600: #dedede;
+    --gray-500: #bfbfbf;
+    --gray-400: #999;
+    --gray-300: #737373;
+    --gray-200: #5f5f5f;
+    --gray-100: #404040;
+    --gray-000: #1f1f1f;
+    --bg-300: #212121;
+    --bg-200: #2d2b2b;
+    --bg-100: #2b2b2d;
+    --blue-900: #fff;
+    --blue-800: #a0e3fe;
+    --blue-700: #81d4fb;
+    --blue-600: #4ec3f8;
+    --blue-500: #28b5f7;
+    --blue-400: #03a9f5;
+    --blue-300: #049ae6;
+    --blue-200: #0487d2;
+    --blue-100: #0476be;
+    --blue-000: #03569c;
+    --red: #e4583e;
+    --color-text: var(--gray-800);
+    --color-secondary-text: var(--gray-500);
+    --color-meta-text: var(--gray-500);
+    --color-highlight: var(--blue-100);
+    --color-primary: var(--blue-500);
+    --page-background: #181818;
+    --card-press-shadow: none;
+    --related-border: hsla(0, 0%, 100%, .05);
+
+    #Logo {
+      background-image: url('https://www.JIKE.com/static/img/JIKE-alt@2x.png');
+    }
+
+    ::selection {
+      color: var(--jike-color-background, #1c2128);
+      background-color: var(--jike-color-foreground, #adbac7);
+    }
+
+    img::selection {
+      background-color: var(--jike-color-foreground, #adbac7);
+    }
+  }
+
+  [data-theme='dark'] {
+    @include dark-mode;
+  }
+
+}

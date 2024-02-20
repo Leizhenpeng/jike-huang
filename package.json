@@ -1,0 +1,53 @@
+{
+  "name": "jiji-huang",
+  "version": "0.0.1",
+  "private": "true",
+  "license": "MIT",
+  "author": "leizhenpeng (https://leizhenpeng.com)",
+  "scripts": {
+    "dev": "run-p watch run:chrome",
+    "dev:firefox": "run-p watch run:firefox",
+    "run:chrome": "web-ext run -t chromium --keep-profile-changes --source-dir ./extension --chromium-profile ./chrome-profile --profile-create-if-missing --start-url https://web.okjike.com/ ",
+    "run:firefox": "web-ext run --source-dir ./extension --start-url https://web.okjike.com/",
+    "build": "bun build:all && bun scripts/build.ts && bun pack:chrome && bun pack:firefox",
+    "build:all": "run-p build:style build:ext build:userscript",
+    "build:userscript": "run-s output:css output:userscript",
+    "build:ext": "tsup",
+    "build:style": "sass src/styles:extension/css --no-source-map --style=compressed",
+    "pack:chrome": "web-ext build -s build-chrome -a build-chrome -o",
+    "pack:firefox": "web-ext build -s build-firefox -a build-firefox -o",
+    "output:userscript": "tsup src/user-scripts/index.ts --no-minify --outDir dist",
+    "output:css": "bun src/user-scripts/write-style.mjs",
+    "watch": "run-p watch:style watch:ext",
+    "watch:ext": "bun build:ext --watch",
+    "watch:style": "bun build:style --watch",
+    "lint": "run-p lint:ts lint:es lint:style lint:prettier",
+    "lint:ts": "tsc --noEmit --skipLibCheck",
+    "lint:es": "eslint --config ./.eslintrc.cjs **/*.{js,ts}",
+    "lint:prettier": "prettier --write **/*.{md,json}",
+    "lint:style": "stylelint **/*.{css,scss}",
+    "test": "vitest",
+    "deps": "pnpm up --interactive --latest"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.4.5",
+    "lucide": "^0.316.0",
+    "webext-patterns": "^1.4.0"
+  },
+  "devDependencies": {
+    "@codennnn/tsconfig": "^1.2.1",
+    "@types/chrome": "^0.0.259",
+    "@types/firefox-webext-browser": "^120.0.0",
+    "@types/jquery": "^3.5.29",
+    "@types/node": "^20.11.10",
+    "bun": "^1.0.25",
+    "npm-run-all": "^4.1.5",
+    "prefer-code-style": "^1.5.13",
+    "sass": "^1.70.0",
+    "stylelint": "^15.10.3",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2",
+    "web-ext": "^7.11.0"
+  }
+}

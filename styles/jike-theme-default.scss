@@ -1,0 +1,1246 @@
+@use './share';
+
+:root {
+  color-scheme: light;
+
+  &:has(#Wrapper.Night) {
+    color-scheme: dark;
+
+    #Top {
+      background-color: transparent;
+    }
+
+    #search-container::before {
+      background-image: url('/static/img/search_icon_light.png');
+    }
+  }
+
+  html,
+  body {
+    min-height: 100vh;
+  }
+}
+
+body {
+  overflow: overlay;
+  scrollbar-gutter: stable;
+
+  h1 {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: default;
+
+    &[href] {
+      cursor: pointer;
+    }
+
+    &:hover {
+      @include share.underline-text;
+    }
+  }
+
+  pre {
+    // 防止代码块不换行导致 Main 容器突破宽度。
+    // .content: 1100px | #RightBar: 270px
+    max-width: calc(1100px - 270px - 2 * var(--jike-layout-column-gap) - 2 * 12px);
+  }
+
+  #Top {
+    height: 55px;
+    background-color: var(--jike-color-bg-content);
+    border: none;
+  }
+
+  #Bottom {
+    color: var(--jike-color-font-secondary);
+    background-color: var(--jike-color-bg-footer);
+    border: none;
+  }
+
+  #Wrapper {
+    background-color: inherit;
+    background-image: none;
+
+    &.Night {
+      background-color: inherit;
+      background-image: none;
+    }
+
+    .content {
+      display: flex;
+      gap: var(--jike-layout-column-gap);
+    }
+
+    @at-root {
+      #Navcol {
+        .nav_item:hover {
+          background-color: var(--box-background-hover-color);
+        }
+
+        .nav_item_current:hover {
+          color: var(--box-foreground-color);
+          background-color: var(--box-background-color);
+        }
+      }
+
+      #Rightcol {
+        #page-outline-title {
+          background-color: var(--jike-color-main-200);
+        }
+
+        .page-outline-item:hover {
+          background-color: var(--box-background-hover-color);
+        }
+      }
+    }
+  }
+
+  #Leftbar {
+    order: 1;
+    float: none;
+  }
+
+  #Main {
+    flex: 1;
+    order: 2;
+    max-width: 85vw;
+    margin: 0;
+  }
+
+  #Rightbar {
+    order: 3;
+    float: none;
+  }
+
+  #search-container {
+    height: 30px;
+    margin: 0 30px;
+    background-color: var(--jike-color-bg-search);
+    border: none;
+    border-radius: 6px;
+
+    &::before {
+      top: 0;
+      left: 4px;
+      background-size: 14px 14px;
+      opacity: 0.6;
+      filter: none;
+    }
+
+    &.active {
+      background-color: var(--jike-color-bg-search-active);
+    }
+
+    #search-result {
+      top: 42px;
+      z-index: var(--zidx-serach);
+      color: var(--jike-color-main-600);
+      font-size: 14px;
+      background: var(--jike-color-bg-widget);
+      border: 1px solid var(--box-border-color);
+      box-shadow: var(--jike-widget-shadow);
+      backdrop-filter: blur(16px);
+
+      .fade {
+        color: var(--jike-color-main-600);
+      }
+
+      .search-item {
+        color: var(--jike-color-foreground);
+        font-weight: bold;
+        border-radius: 5px;
+
+        &.active {
+          color: var(--jike-color-foreground);
+
+          &.v2p-no-active {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+  }
+
+  .box {
+    color: var(--box-foreground-color);
+    background-color: var(--jike-color-bg-content);
+    border: none;
+    border-radius: var(--box-border-radius);
+    box-shadow: var(--jike-box-shadow);
+
+    .header {
+      > h1 {
+        font-weight: bold;
+        font-size: 22px;
+      }
+
+      .gray {
+        color: var(--color-gray);
+      }
+    }
+  }
+
+  .button {
+    --button-hover-shadow: 0 1.8px 0 var(--button-border-color),
+      0 1.8px 0 var(--button-background-color);
+
+    &.normal,
+    &.super {
+      @include share.common-button;
+    }
+
+    &.special {
+      --button-hover-shadow: 0 1.8px 0 var(--jike-color-accent-200),
+        0 1.8px 0 var(--jike-color-accent-100);
+
+      color: var(--jike-color-accent-500);
+      background: var(--jike-color-accent-100);
+      box-shadow: var(--button-hover-shadow);
+
+      &:hover {
+        &,
+        &:enabled {
+          color: var(--jike-color-accent-600);
+          background: var(--jike-color-accent-100);
+          border: none;
+          box-shadow: var(--button-hover-shadow);
+        }
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  /* 帖主徽章 & 管理员徽章 & 自己徽章 */
+  .badge {
+    padding: 2px 5px;
+    font-weight: bold;
+    border: 1px solid var(--jike-color-accent-400);
+    user-select: none;
+
+    &:first-child {
+      border: 1px solid var(--jike-color-accent-400);
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    &:last-child {
+      border: 1px solid var(--jike-color-accent-400);
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+
+    &.op {
+      color: var(--jike-color-accent-500);
+      background-color: var(--jike-color-accent-50);
+    }
+
+    &.mod {
+      color: var(--jike-color-bg-content);
+      background-color: var(--jike-color-accent-400);
+    }
+
+    &.you {
+      color: var(--jike-color-orange-400);
+      background-color: var(--jike-color-orange-50);
+      border: 1px solid var(--jike-color-orange-400);
+    }
+
+    &.mini {
+      height: 1.2em;
+      padding: 0 3px;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
+
+  a.node:is(:active, :link, :visited) {
+    padding: 5px 6px;
+    color: var(--jike-color-font-secondary);
+    font-size: 13px;
+    background-color: var(--jike-color-main-100);
+    border-radius: 4px;
+
+    &:hover {
+      color: var(--jike-color-main-500);
+      background-color: var(--jike-color-main-200);
+    }
+  }
+
+  .outdated {
+    font-size: 12px;
+    border-color: var(--jike-color-main-200);
+    border-bottom: none;
+  }
+
+  :is(.page_normal, .page_current) {
+    &:is(:link, :visited) {
+      padding: 6px 9px;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+      user-select: none;
+    }
+  }
+
+  .page_normal:is(:link, :visited) {
+    font-weight: 500;
+    background-color: var(--jike-color-bg-content);
+    box-shadow: 0 2px 2px var(--box-background-hover-color);
+    transition: transform 0.25s;
+
+    &:hover {
+      transform: scale(1.1) translateY(-2px);
+    }
+  }
+
+  .page_current:is(:link, :visited) {
+    font-weight: bold;
+    background-color: var(--box-background-hover-color);
+    box-shadow: none;
+    pointer-events: none;
+  }
+
+  .page_input {
+    display: none;
+  }
+
+  .dock_area {
+    background: var(--jike-color-main-100);
+  }
+
+  .member-activity-bar {
+    background-color: var(--jike-color-main-200);
+
+    .member-activity-start {
+      background-color: var(--jike-color-accent-200);
+    }
+
+    .member-activity-fourth {
+      background-color: var(--jike-color-accent-400);
+    }
+
+    .member-activity-half {
+      background-color: var(--jike-color-accent-500);
+    }
+
+    .member-activity-almost {
+      background-color: var(--jike-color-accent-600);
+    }
+
+    .member-activity-done {
+      background-color: var(--jike-color-orange-400);
+    }
+  }
+
+  .online {
+    padding: 6px 8px;
+    color: var(--jike-color-bg-content);
+    font-size: 13px;
+    background: var(--jike-color-accent-400);
+    border-radius: 5px;
+    user-select: none;
+  }
+
+  #topic_supplement {
+    @include share.input(550px) {
+      overflow-y: auto;
+    }
+  }
+
+  .item_hot_topic_title {
+    --offset: 2.4px;
+
+    @include share.line-clamp(2);
+
+    position: relative;
+    padding: var(--offset) 0;
+    text-shadow: none;
+
+    > a:hover {
+      text-underline-offset: var(--offset);
+    }
+  }
+
+  form {
+    textarea#topic_title {
+      @include share.input(75px);
+    }
+
+    #topic_title {
+      @include share.input(30px);
+    }
+
+    #topic_content {
+      @include share.input(120px);
+    }
+  }
+
+  // 主题编辑内容的语法。
+  #syntax-selector {
+    .radio-group {
+      padding: 3px;
+      background-color: var(--jike-color-background);
+
+      & > input[type='radio'] {
+        &:checked + label {
+          background-color: var(--jike-color-accent-100);
+        }
+
+        + label {
+          font-size: 13px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    label {
+      color: var(--jike-color-foreground);
+    }
+  }
+
+  // 提醒系统里的回复时间。
+  .snow {
+    color: var(--jike-color-main-400);
+  }
+
+  // 新消息提醒。
+  .orange-dot {
+    background: var(--jike-color-orange-400);
+  }
+
+  // 记事本：https://www.JIKE.com/notes
+  form[action^='/notes'] {
+    .cell {
+      background-color: transparent !important;
+    }
+  }
+
+  // 输入框：https://www.JIKE.com/notes ｜ https://www.JIKE.com/t
+  .alt {
+    background-color: var(--jike-color-bg-input);
+    border: 1px solid var(--button-border-color);
+  }
+
+  // https://www.JIKE.com/i/about
+  a.btn_hero {
+    border-color: var(--jike-color-foreground);
+
+    &:hover {
+      background-color: var(--jike-color-foreground);
+    }
+  }
+
+  .cell_ops {
+    background-color: transparent;
+  }
+
+  :is(
+      .topic_content,
+      .reply_content,
+      .v2p-topic-preview-content,
+      .v2p-topic-preview-addons,
+      .v2p-reply-preview
+    ) {
+    a[href^='http'] {
+      @include share.link;
+
+      color: currentColor;
+      background-color: var(--jike-color-main-100);
+
+      &:hover {
+        background-color: var(--jike-color-main-200);
+      }
+    }
+
+    // 站内链接
+    a[href*='JIKE.com/t'],
+    a[href^='/t'],
+    a[href^='/go'] {
+      @include share.link;
+
+      color: var(--jike-color-accent-500);
+      background-color: var(--jike-color-accent-50);
+
+      &:hover {
+        color: var(--jike-color-accent-500);
+        background-color: var(--jike-color-accent-50);
+      }
+    }
+  }
+
+  // 主题内容编辑器。
+  .CodeMirror {
+    .CodeMirror-focused.cm-s-one-dark {
+      background-color: transparent;
+    }
+
+    .CodeMirror-gutters {
+      padding-right: 5px;
+      background-color: var(--jike-color-bg-input);
+      border-right: 1px solid var(--jike-color-main-300);
+    }
+
+    .CodeMirror-linenumber {
+      color: var(--jike-color-main-400);
+    }
+  }
+
+  .cm-s-one-dark {
+    background-color: var(--jike-color-bg-input);
+  }
+
+  // 主题内容编辑器。
+  #workspace {
+    overflow: hidden;
+    border: 1px solid var(--button-border-color);
+    border-radius: 8px;
+  }
+
+  // 选择主题节点的下拉选择框。
+  .select2-container {
+    width: 200px !important;
+
+    .select2-selection {
+      background-color: var(--jike-color-background);
+      border: 1px solid var(--jike-color-border);
+
+      .select2-selection__rendered,
+      .select2-selection__placeholder {
+        color: var(--jike-color-foreground);
+      }
+    }
+
+    .select2-dropdown {
+      @include share.popup;
+
+      transform: translateY(5px);
+
+      .select2-search {
+        padding: 5px;
+
+        .select2-search__field {
+          padding: 6px 4px;
+          background-color: transparent;
+          border: 1px solid var(--jike-color-main-200);
+          border-radius: 4px;
+
+          &:focus-visible {
+            border-color: var(--jike-color-main-400);
+            outline: none;
+          }
+        }
+      }
+
+      .select2-results > .select2-results__options {
+        padding: 5px;
+      }
+
+      .select2-container--default .select2-results__option--selected {
+        color: currentColor;
+        background-color: var(--jike-color-accent-100);
+      }
+    }
+
+    .select2-results__option {
+      border-radius: 4px;
+    }
+
+    .select2-results__option--highlighted.select2-results__option--selectable {
+      color: currentColor;
+      background-color: var(--jike-color-main-200);
+    }
+
+    .select2-results__option--selected {
+      color: currentColor !important;
+      background-color: var(--jike-color-accent-100) !important;
+    }
+  }
+
+  // 提示回复没有内容。
+  .problem {
+    color: currentColor;
+    color: var(--jike-color-orange-400);
+    background-color: var(--jike-color-orange-50);
+    border-color: var(--jike-color-orange-400);
+    border-bottom: none;
+  }
+
+  // 正文内容的表格。
+  .markdown_body table {
+    border-top: 1px solid var(--jike-color-border-darker);
+    box-shadow: none;
+
+    tr {
+      th,
+      td {
+        border: 1px solid var(--jike-color-border-darker);
+      }
+    }
+
+    tr:nth-child(2n) {
+      background-color: var(--box-background-alt-color);
+    }
+  }
+
+  // 个人页的链接。
+  .social_label:is(:link, :visited, :active) {
+    background-color: var(--jike-color-main-100);
+    box-shadow: none;
+
+    &:hover {
+      background-color: var(--jike-color-main-200);
+    }
+  }
+
+  .green {
+    color: var(--jike-color-accent-500);
+  }
+
+  .message {
+    color: var(--jike-color-orange-400);
+    background-color: var(--jike-color-orange-50);
+    border: none;
+  }
+
+  // 账户余额。
+  .balance_area,
+  a.balance_area:is(:link, :visited) {
+    display: inline-flex;
+    gap: 3px;
+    align-items: center;
+    color: var(--jike-color-foreground);
+    font-weight: 600;
+    text-shadow: none;
+    background: var(--jike-color-main-100);
+
+    &:hover {
+      background: var(--jike-color-main-200);
+    }
+  }
+
+  :is(.subtle) {
+    background-color: var(--jike-color-bg-subtle);
+    border-left: 3px solid var(--jike-color-accent-200);
+
+    .topic_content {
+      font-size: 15px;
+    }
+  }
+
+  // 设置页的开关。
+  .onoffswitch label .frame::before {
+    color: #fff;
+    background-color: var(--jike-color-accent-400);
+  }
+
+  .onoffswitch label .frame::after {
+    color: var(--jike-color-main-100);
+    background-color: var(--jike-color-main-400);
+  }
+
+  select {
+    @include share.select-box;
+
+    padding: 4px 6px;
+  }
+}
+
+/* ====== 帖子标签 ====== */
+
+.box {
+  .tag {
+    &:link,
+    &:visited {
+      color: var(--jike-color-font-secondary);
+      font-size: 12px;
+      background-color: var(--jike-color-main-100);
+      border-radius: 5px;
+    }
+
+    &::before {
+      color: var(--jike-color-main-500);
+    }
+
+    > li {
+      opacity: 0.6;
+    }
+  }
+}
+
+/* ------ 帖子标签 ------ */
+
+#Top {
+  .content {
+    height: 100%;
+  }
+
+  .site-nav {
+    height: 100%;
+    padding: 0;
+  }
+
+  .tools {
+    display: flex;
+    gap: 8px 14px;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 400;
+    font-size: 14px;
+
+    .top {
+      height: 26px;
+      padding: 0 6px;
+      color: var(--jike-color-main-500);
+      line-height: 26px;
+      white-space: nowrap;
+      border-radius: 4px;
+
+      &:hover {
+        color: var(--jike-color-foreground);
+      }
+
+      &:not(.v2p-hover-btn):hover {
+        background-color: var(--jike-color-main-100);
+      }
+    }
+
+    * {
+      margin-left: 0;
+    }
+  }
+}
+
+/* ================================================================ */
+
+#Main {
+  .box {
+    padding: 0 12px;
+
+    &.node-header {
+      > .cell {
+        margin: 0 -12px;
+      }
+    }
+
+    .cell {
+      padding: 20px 10px;
+      background-image: none !important;
+    }
+
+    .cell_ops {
+      padding: 15px 5px;
+    }
+
+    &:has(form[action='/write']) {
+      .cell {
+        &:nth-child(1),
+        &:nth-child(2) {
+          border: none;
+        }
+
+        &:has(#syntax-selector) {
+          padding: 8px 0 !important;
+
+          .tab-alt-container {
+            gap: 0 8px;
+          }
+
+          .tab-alt {
+            padding: 4px 2px;
+            border-bottom-width: 2px;
+            transition: none;
+
+            &:not(.active):hover {
+              border-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ====== 帖子操作按钮 ====== */
+  .topic_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 8px 0;
+    column-gap: 5px;
+    background: none;
+
+    .topic_stats {
+      flex: 1;
+      order: 99;
+      float: none;
+      margin-left: 10px;
+      padding: 0 !important;
+      font-size: 12px;
+      text-shadow: none;
+    }
+
+    .topic_thanked {
+      font-size: 12px;
+    }
+
+    a.tb:link {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      padding: 5px;
+      white-space: nowrap;
+      text-shadow: none;
+      column-gap: 5px;
+      background: none;
+      border-radius: 4px;
+
+      &:not(.v2p-hover-btn) {
+        color: var(--jike-color-font-secondary);
+      }
+
+      &:hover:not(.v2p-hover-btn) {
+        color: currentColor;
+        background: var(--jike-color-main-100);
+      }
+    }
+  }
+
+  .vote:link {
+    color: var(--jike-color-main-500);
+    border-color: var(--jike-color-main-300);
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: 0 2px 2px var(--jike-color-main-200);
+    }
+  }
+
+  .cell {
+    .topic-link {
+      color: var(--jike-color-foreground);
+      text-decoration: none;
+
+      &:visited {
+        color: var(--jike-color-main-400);
+      }
+    }
+
+    .topic_info {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      user-select: none;
+      pointer-events: none;
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+        background-color: var(--jike-color-bg-content);
+        content: '';
+        inset: 0 0 -6px;
+      }
+
+      .votes,
+      .node,
+      strong:first-of-type,
+      span:first-of-type,
+      .v2p-topic-ignore-btn {
+        position: relative;
+        z-index: 2;
+        pointer-events: auto;
+      }
+
+      a[href^='/member'] {
+        color: var(--jike-color-main-500);
+        font-weight: 500;
+      }
+    }
+
+    @mixin count {
+      display: inline-block;
+      padding: 5px 10px;
+      font-weight: 400;
+      font-size: 12px;
+      white-space: nowrap;
+      border-radius: 5px;
+      user-select: none;
+    }
+
+    .count_livid {
+      @include count;
+
+      color: var(--jike-color-main-500);
+      background-color: var(--jike-color-main-200);
+    }
+
+    .count_orange {
+      @include count;
+
+      color: var(--jike-color-main-100);
+      font-weight: bold;
+      background-color: var(--jike-color-orange-400);
+    }
+
+    .item_title {
+      .topic-link {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .cell.item {
+    tr > td:nth-child(2) {
+      width: 30px;
+    }
+  }
+
+  .box,
+  .v2p-modal-content {
+    > .cell[id^='r']:not(:has(.cell[id^='r'])) .reply_content {
+      padding-bottom: 0;
+    }
+  }
+
+  .cell[id^='r'] {
+    --bg-reply: var(--jike-color-bg-content);
+
+    background-color: var(--bg-reply);
+
+    &:not(:has(+ .cell[id^='r'])) {
+      border-bottom: none; // 去除最后一条回复的底边框。
+    }
+
+    &:hover {
+      > table {
+        td:last-of-type {
+          .fr {
+            a {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+
+    .ago {
+      color: var(--jike-color-main-400);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .reply_content {
+      padding-bottom: 10px;
+      line-height: 1.5; // 回复内容行距可以紧凑一点。
+    }
+
+    > table {
+      &:first-of-type td {
+        &:first-of-type {
+          width: 40px;
+
+          .avatar {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 5px;
+            aspect-ratio: 1;
+          }
+        }
+      }
+
+      /* 嵌套的回复 */
+      ~ .cell[id^='r'] {
+        --bg-reply: var(--jike-color-bg-reply);
+
+        position: relative;
+        z-index: var(--zidx-expand-btn);
+        padding: 15px 0 0 15px;
+        border: none;
+        border-radius: 0;
+        box-shadow: -2.4px 0 var(--jike-color-border-darker);
+
+        /* 多层嵌套 */
+        .cell[id^='r'] {
+          padding: 0;
+          box-shadow: none;
+
+          &.v2p-indent {
+            padding-left: 15px; /* 取消靠左对齐，逐层缩进 */
+            border-left: 1px solid var(--jike-color-border-darker);
+          }
+        }
+
+        tr td {
+          &:first-of-type {
+            width: 25px;
+
+            .avatar {
+              width: 25px !important;
+              height: 25px !important;
+              border-radius: 4px;
+            }
+          }
+
+          /* 回复人的昵称 */
+          &:nth-child(3) strong a {
+            font-size: 13px;
+          }
+        }
+
+        /* 嵌套回复的内容 */
+        .reply_content {
+          padding-right: 5px;
+        }
+      }
+
+      td {
+        &:nth-of-type(2) {
+          /* 头像与右侧的距离 */
+          width: 15px;
+        }
+
+        &:last-of-type {
+          a.dark {
+            color: var(--jike-color-main-600);
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: none;
+            }
+          }
+
+          .fr {
+            position: relative;
+            top: -3px;
+            user-select: none;
+
+            a {
+              opacity: 0;
+            }
+
+            & + .sep3 {
+              height: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &:last-of-type {
+      border: none;
+    }
+
+    .no {
+      position: relative;
+      top: -4px;
+      padding: 5px 10px;
+      color: var(--jike-color-main-350);
+      font-size: 12px;
+      background-color: transparent;
+      border-radius: 5px;
+      user-select: none;
+    }
+  }
+
+  #Tabs {
+    position: sticky;
+    top: 0;
+    z-index: var(--zidx-tabs);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--jike-color-bg-content);
+    border-bottom: 1px solid var(--box-border-color);
+    user-select: none;
+
+    .tab {
+      margin: 0;
+    }
+  }
+
+  #SecondaryTabs {
+    padding: 10px;
+    background-color: var(--jike-color-main-100);
+    border-radius: 5px;
+  }
+
+  .topic_content,
+  .reply_content {
+    @include share.text-content;
+
+    color: currentColor;
+
+    // 被 @ 的用户
+    a[href^='/member'] {
+      position: relative;
+      bottom: 1px;
+      color: var(--jike-color-main-500);
+      font-size: 13px;
+      text-decoration: underline;
+      text-underline-offset: 0.4ex;
+    }
+  }
+
+  .thank_area {
+    font-size: 12px;
+  }
+
+  .tab {
+    color: var(--jike-color-foreground);
+    background-color: transparent;
+    user-select: none;
+
+    &:not(.v2p-hover-btn):hover {
+      background-color: var(--jike-color-main-100);
+    }
+  }
+
+  .tab_current {
+    color: var(--box-background-color);
+    background-color: var(--box-foreground-color);
+    user-select: none;
+  }
+
+  #reply-box {
+    &.reply-box-sticky {
+      bottom: 20px;
+      z-index: var(--zidx-reply-box);
+      margin: 0 -10px;
+      padding: 0 22px;
+      overflow: visible;
+      border: none;
+      border-radius: var(--box-border-radius);
+      outline: 2px solid var(--jike-color-main-200);
+    }
+
+    .v2p-reply-wrap {
+      #reply_content {
+        background-color: transparent;
+        border: none;
+
+        &:focus {
+          background-color: var(--jike-color-bg-content);
+          outline: none;
+        }
+
+        &::placeholder {
+          color: var(--jike-color-main-500);
+          font-size: 14px;
+        }
+      }
+    }
+
+    .flex-one-row:last-of-type {
+      flex-direction: row-reverse;
+      gap: 10px;
+      justify-content: flex-start;
+
+      .gray {
+        margin-right: auto;
+      }
+    }
+
+    > .cell {
+      font-size: 12px;
+
+      &.flex-one-row {
+        min-height: 45px;
+        padding: 0 10px;
+        border: none;
+      }
+
+      &.flex-row-end {
+        padding: 12px 10px;
+        border: none;
+      }
+
+      &:has(form) {
+        padding-top: 0;
+      }
+    }
+  }
+
+  #no-comments-yet {
+    color: var(--color-gray);
+    border-color: var(--color-gray);
+  }
+
+  #notifications {
+    .cell[id^='n'] {
+      &:hover {
+        .node {
+          opacity: 1;
+        }
+      }
+
+      .node {
+        opacity: 0;
+      }
+
+      .payload {
+        color: var(--jike-color-foreground);
+        background-color: var(--jike-color-main-100);
+      }
+
+      .topic-link:visited {
+        color: var(--jike-color-main-400);
+      }
+    }
+  }
+
+  .cell_tabs {
+    .cell_tab_current {
+      font-weight: bold;
+      border-color: var(--jike-color-foreground);
+    }
+
+    .cell_tab {
+      color: var(--jike-color-foreground);
+
+      &:hover {
+        border-color: var(--jike-color-main-300);
+      }
+    }
+  }
+}
+
+/* ================================================================ */
+
+#Rightbar {
+  .cell:has(.light-toggle) {
+    font-size: 13px;
+  }
+
+  a.dark:is(:link, :active, :visited, :hover) {
+    color: var(--jike-color-main-500);
+
+    &:hover {
+      color: var(--jike-color-main-600);
+    }
+  }
+}
+
+/* ================================================================ */
+
+#Bottom {
+  position: sticky;
+  top: 100%;
+
+  a.dark {
+    font-weight: 400;
+    font-size: 13px;
+
+    &:is(:link, :active, :visited, :hover) {
+      color: var(--jike-color-main-500);
+    }
+  }
+}

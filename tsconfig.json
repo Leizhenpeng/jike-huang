@@ -4,7 +4,10 @@
     "baseUrl": "./",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
+    "paths": {
+      "src/*": ["src/*"],
+    },
   },
-  "include": ["./tsup.config.ts", "src/**/*", "scripts/**/*.ts", "test/**/*.ts"]
+  "include": ["./tsup.config.ts", "src/**/*", "scripts/**/*.ts", "test/**/*.ts"],
 }

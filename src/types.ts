@@ -3,10 +3,10 @@ import type { MessageFrom, StorageKey } from './constants'
 declare global {
   interface Window {
     GM_addStyle?: (style: string) => void
-    __V2P_AddingReading?: boolean
-    __V2P_DecodeStatus?: 'decodeed'
-    __V2P_StorageCache?: StorageSettings
-    __V2P_Tasks?: Map<TaskId, (result: unknown) => void>
+    __JIKE_AddingReading?: boolean
+    __JIKE_DecodeStatus?: 'decodeed'
+    __JIKE_StorageCache?: StorageSettings
+    __JIKE_Tasks?: Map<TaskId, (result: unknown) => void>
   }
 }
 
@@ -20,45 +20,15 @@ export interface SettingsSyncInfo {
 }
 
 export interface Options {
-  /** 是否在新标签页打开主题。 */
-  openInNewTab: boolean
-  /** 自动签到设置。 */
-  autoCheckIn: {
-    /** 是否启用自动签到。 */
-    enabled: boolean
-  }
-  /** 颜色主题设置。 */
-  theme: {
-    /** 是否自动跟随系统切换主题。 */
-    autoSwitch: boolean
-  }
-  /** 主题回复设置。 */
-  reply: {
-    /** 是否预加载回复内容。 */
-    preload?: 'off' | 'auto'
-    /** 是否使用水平布局。 */
-    layout?: 'auto' | 'horizontal'
-  }
-  /** 回复内容设置。 */
-  replyContent: {
-    /** 是否自动折叠回复内容。 */
-    autoFold?: boolean
-    /** 是否隐藏回复时间。 */
-    hideReplyTime?: boolean
-    /** 是否隐藏 @ 提及用户名。 */
-    hideRefName?: boolean
-  }
-  /** 嵌套回复设置。 */
-  nestedReply: {
-    /** 嵌套回复展示形式。 */
-    display: 'align' | 'indent' | 'off'
-    /** 当一条回复中指定了多个用户时，是否参与嵌套。 */
-    multipleInsideOne?: 'nested' | 'off'
-  }
-  /** 用户标签设置。 */
-  userTag: {
-    /** 用户标签展示形式。 */
-    display: 'inline' | 'block'
+  // /** 动态浏览。 */
+  // viewContent: {
+  //   /** 在新标签页中打开链接。 */
+  //   openInNewTab: boolean
+  // }
+
+  notification: {
+    /** 跳转详情 */
+    jumpToDetail: boolean
   }
 }
 

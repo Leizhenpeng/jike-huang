@@ -1,15 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 
 <head>
-  <title></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <title>设置-黄吉吉</title>
+
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/jike-theme-var.css" />
+  <link rel="stylesheet" href="../css/options.css" />
 </head>
 
 <body>
-  22
+  <div class="layout">
+    <div class="side collapsed">
+      <div class="side-header">
+        <img src="../images/icon-32.png" />
+        <span class="side-header-title">黄吉吉-设置</span>
+      </div>
+
+      <div>
+        <ul class="menu">
+          <li data-menu-key="settings" class="menu-item">
+            <i class="menu-item-icon" data-lucide="settings"></i>
+            <span class="menu-item-title">增强选项</span>
+          </li>
+          <li data-menu-key="tags" class="menu-item">
+            <i class="menu-item-icon" data-lucide="tags"></i>
+            <span class="menu-item-title">用户标签</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <div data-content-key="settings">
+        <form id="options-form">
+          <div class="options-form-inner">
+            <fieldset>
+              <legend>通知栏</legend>
+              <div class="form-checkbox">
+                <input type="checkbox" id="jumpToDeatil" checked="false" />
+                <div class="combo">
+                  <label for="jumpToDeatil">跳转动态详情</label>
+                  <p>点击通知栏中的动态标题跳转到对应的动态详情页</p>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- <fieldset>
+              <legend>动态浏览</legend>
+              <div class="form-checkbox">
+                <input type="checkbox" id="openInNewTab" checked="false" />
+                <div class="combo">
+                  <label for="openInNewTab">新标签页打开动态</label>
+                  <p>在新标签页中打开动态详情页</p>
+                </div>
+              </div>
+            </fieldset> -->
+
+
+            <hr />
+
+          </div>
+        </form>
+      </div>
+
+      <div data-content-key="tags"></div>
+    </div>
+  </div>
+
+  <template id="tags-empty">
+    <div class="tags-empty-block">
+      <div>
+        <div class="empty-tip">在用户个人信息弹框中，点击“添加用户标签”按钮以设置。</div>
+
+        <div class="empty-content">
+          <div class="avatar"></div>
+          <div class="userinfo">
+            <div class="userinfo-top">
+              <div class="userinfo-avatar"></div>
+              <div class="userinfo-lines">
+                <div style="width: 80px"></div>
+                <div style="width: 150px"></div>
+                <div style="width: 110px"></div>
+              </div>
+            </div>
+
+            <div class="userinfo-bottom">
+              <div class="userinfo-btn">添加用户标签</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="../scripts/jquery.min.js"></script>
+  <script src="../scripts/options.min.js"></script>
 </body>
 
 </html>

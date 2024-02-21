@@ -15,6 +15,7 @@
     {
       "matches": ["https://web.okjike.com/*"],
       "css": ["css/jike-theme-var.css", "css/jike-theme-default.css"],
+      "js": ["scripts/jquery.min.js"],
       "run_at": "document_start",
       "all_frames": true
     },

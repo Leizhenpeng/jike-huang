@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { defaultOptions, EXTENSION_NAME, StorageKey, JIKE } from './constants'
+import { defaultOptions, EXTENSION_NAME, JIKE, StorageKey } from './constants'
 import type { SettingsSyncInfo, StorageItems, StorageSettings } from './types'
 
 /**
@@ -178,7 +178,7 @@ const mark = `${EXTENSION_NAME}_settings`
 /**
  * 获取存储的个人配置备份。
  */
-export async function getV2P_Settings(): Promise<
+export async function getJIKE_Settings(): Promise<
   { noteId: string; config: StorageSettings } | undefined
 > {
   let noteId: string | undefined
@@ -225,11 +225,11 @@ export async function getV2P_Settings(): Promise<
 /**
  * 将个人配置备份存储。
  */
-export async function setV2P_Settings(
+export async function setJIKE_Settings(
   storageSettings: StorageSettings,
   signal?: AbortSignal
 ): Promise<SettingsSyncInfo> {
-  const data = await getV2P_Settings()
+  const data = await getJIKE_Settings()
 
   const updating = !!data // 判断操作是「初始化数据」还是「更新数据」。
 
@@ -279,17 +279,16 @@ export async function setV2P_Settings(
 export function getStorage(useCache = true): Promise<StorageSettings> {
   return new Promise((resolve, reject) => {
     if (useCache) {
-      if (window.__V2P_StorageCache) {
-        resolve(window.__V2P_StorageCache)
+      if (window.__JIKE_StorageCache) {
+        resolve(window.__JIKE_StorageCache)
       }
     }
 
     const runEnv = getRunEnv()
-
     if (!(runEnv === 'chrome' || runEnv === 'web-ext')) {
       const data: StorageSettings = { [StorageKey.Options]: defaultOptions }
       if (typeof window !== 'undefined') {
-        window.__V2P_StorageCache = data
+        window.__JIKE_StorageCache = data
       }
       resolve(data)
     } else {
@@ -299,7 +298,6 @@ export function getStorage(useCache = true): Promise<StorageSettings> {
           let data: StorageSettings
 
           const options = items[StorageKey.Options]
-
           if (options) {
             data = {
               ...items,
@@ -310,11 +308,12 @@ export function getStorage(useCache = true): Promise<StorageSettings> {
           }
 
           if (typeof window !== 'undefined') {
-            window.__V2P_StorageCache = data
+            window.__JIKE_StorageCache = data
           }
           resolve(data)
         })
         .catch((err) => {
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
           reject(err)
         })
     }
@@ -325,7 +324,7 @@ export function getStorage(useCache = true): Promise<StorageSettings> {
  * 同步获取用户存储的应用数据。
  */
 export function getStorageSync(): StorageSettings {
-  const storage = window.__V2P_StorageCache
+  const storage = window.__JIKE_StorageCache
 
   if (!storage) {
     throw new Error(`${EXTENSION_NAME}: 无可用的 Storage 缓存数据`)
@@ -363,7 +362,7 @@ export async function setStorage<T extends StorageKey>(
           }
           controller = new AbortController()
 
-          setV2P_Settings(settings, controller.signal)
+          setJIKE_Settings(settings, controller.signal)
         }
       } catch (err) {
         if (String(err).includes('QUOTA_BYTES_PER_ITEM quota exceeded')) {

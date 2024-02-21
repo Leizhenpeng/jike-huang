@@ -228,27 +228,11 @@ export const imgurClientIdPool = [
 
 /** 扩展初始化提供的默认选项 */
 export const defaultOptions: Options = {
-  openInNewTab: false,
-  autoCheckIn: {
-    enabled: true,
-  },
-  theme: {
-    autoSwitch: false,
-  },
-  reply: {
-    preload: 'off',
-  },
-  replyContent: {
-    autoFold: true,
-    hideReplyTime: true,
-    hideRefName: true,
-  },
-  nestedReply: {
-    display: 'indent',
-    multipleInsideOne: 'nested',
-  },
-  userTag: {
-    display: 'inline',
+  // viewContent: {
+  //   openInNewTab: true,
+  // },
+  notification: {
+    jumpToDetail: true,
   },
 }
 

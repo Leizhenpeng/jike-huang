@@ -2,7 +2,6 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: {
-    'popup.min': 'src/pages/popup.ts',
     'options.min': 'src/pages/options.ts',
 
     'inject-fetch.min': 'src/contents/inject-fetch.ts',

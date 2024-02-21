@@ -98,6 +98,10 @@ chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
 
     const url = new URL(tab.url)
 
+    await chrome.sidePanel.setPanelBehavior({
+      openPanelOnActionClick: true,
+    })
+
     if (url.origin === 'https://web.okjike.com') {
       await chrome.sidePanel.setOptions({
         tabId,
@@ -116,17 +120,21 @@ chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
 chrome.action.onClicked.addListener(() => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0]
-    if (!('sidePanel' in chrome)) {
+
+    if (!('sidePanel' in chrome) || !tab.id) {
       return
     }
     const tabId = tab.id
-    if (!tabId) {
-      return
-    }
+
     void (async () => {
-      await chrome.sidePanel.setPanelBehavior({
-        openPanelOnActionClick: true,
-      })
+      if (chrome.runtime.id) {
+        await chrome.sidePanel.setOptions({
+          tabId,
+          path: 'pages/options.html',
+          enabled: true,
+        })
+      }
+
       await chrome.sidePanel.open({ tabId })
     })()
   })

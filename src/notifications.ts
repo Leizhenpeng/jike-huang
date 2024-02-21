@@ -1,5 +1,8 @@
+//ts-ignore
 // 常量配置
-import { toCamelCase } from './utils'
+
+import { StorageKey } from './constants'
+import { getStorage, getStorageSync, toCamelCase } from './utils'
 
 const API_ENDPOINT = 'https://web-api.okjike.com/api/graphql'
 const OKJIKE_WEB_URL = 'https://web.okjike.com'
@@ -28,23 +31,25 @@ interface NotificationResponse {
 // fetch请求拦截函数
 function interceptRequest() {
   const originFetch = window.fetch as any
-  // @ts-expect-error
   window.fetch = async (url: RequestInfo, request: RequestInit): Promise<Response> => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const response = await originFetch(url, request).catch((e: any) => {
       console.error('网络请求失败:', e)
       throw e
     })
-    console.log('请求URL:', url)
-
+    // console.log('请求URL:', url)
     if (url === API_ENDPOINT) {
       try {
         const reqBody = request.body as string
-        const text = await response.clone().text()
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const text = (await response.clone().text()) as string
         const req = JSON.parse(reqBody)
         const res: NotificationResponse = JSON.parse(text)
 
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         if (req.operationName === 'ListNotification') {
           // 如果没有查询到,过300ms后再次查询,直到查询到为止,最多查询5次
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
           maxQueryTimes(addNotificationLink.bind(null, res), 5, 500).catch((e) => {
             console.error('查询通知节点失败:', e)
           })
@@ -54,13 +59,12 @@ function interceptRequest() {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return response
   }
 }
-
 interceptRequest()
 
-// 如果没有查询到,过300ms后再次查询,直到查询到为止,最多查询5次
 function maxQueryTimes(func: Function, times = 5, delay = 300) {
   return new Promise((resolve, reject) => {
     let count = 0
@@ -79,7 +83,7 @@ function maxQueryTimes(func: Function, times = 5, delay = 300) {
   })
 }
 
-async function addNotificationLink(res: NotificationResponse): Promise<boolean> {
+function addNotificationLink(res: NotificationResponse): boolean {
   const nodes = res.data.viewer.notifications.nodes
   const notificationsEl = document.querySelectorAll('[class^="Notification__NotiItemContainer"]')
 
@@ -87,10 +91,9 @@ async function addNotificationLink(res: NotificationResponse): Promise<boolean> 
   const filteredNotificationsEl = Array.from(notificationsEl).filter((elem) => {
     return !elem.classList.contains('jike-notification-link-added')
   })
-  if (nodes.length == 0) {
+  if (nodes.length === 0) {
     return false
   }
-  console.log(nodes)
 
   if (nodes.length !== filteredNotificationsEl.length) {
     console.warn('通知元素数量与节点数据不一致，可能会导致链接添加错误。')
@@ -99,9 +102,9 @@ async function addNotificationLink(res: NotificationResponse): Promise<boolean> 
   nodes.forEach((node, index) => {
     // 这个地方不对，如果数据不一致，可能会导致错误。
     const elem = filteredNotificationsEl[index] as HTMLElement
-    if (elem && node.linkUrl) {
+
+    if (node.linkUrl) {
       let url = node.linkUrl.replace(JIKE_APP_URL_SCHEMA, OKJIKE_WEB_URL)
-      console.log(node)
       if (node.linkType === 'COMMENT') {
         // "jike://page.jk/originalPost/65c9d072164d89e601e62702?locateCommentId=65ce0e8bf766db7481825ebd"
         //65c9d072164d89e601e62702   65ce0e8bf766db7481825ebd
@@ -112,13 +115,11 @@ async function addNotificationLink(res: NotificationResponse): Promise<boolean> 
         const postId = node.linkUrl.split('targetId=').pop()?.split('&').shift()
         const postType =
           node.linkUrl.split('targetType=').pop()?.split('&').shift() ?? 'ORIGINAL_POST'
-
         url = `${OKJIKE_WEB_URL}/${toCamelCase(postType)}/${postId}`
       }
       if (node.linkType === 'USER') {
         // "jike://page.jk/user/572ff18b-9121-416a-9490-e91997e2a2a8" 572ff18b-9121-416a-9490-e91997e2a2a8
         const userId = node.linkUrl.split('user/').pop()
-        console.log(userId)
         url = `${OKJIKE_WEB_URL}/u/${userId}`
       }
       if (node.linkType === 'REPOST') {

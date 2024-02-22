@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "黄吉吉",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "摊牌了，我要重新定义即刻网页版的体验",
   "permissions": ["scripting", "contextMenus", "storage", "sidePanel"],
   "host_permissions": ["https://web.okjike.com/*"],

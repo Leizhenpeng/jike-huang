@@ -90,52 +90,50 @@ chrome.tabs.onUpdated.addListener((tabId, _, tab) => {
   if (!('sidePanel' in chrome)) {
     return
   }
+  if (!tab.url) {
+    return
+  }
 
-  void (async () => {
-    if (!tab.url) {
+  const url = new URL(tab.url)
+
+  chrome.sidePanel.setPanelBehavior({
+    openPanelOnActionClick: true,
+  })
+
+  if (url.origin === 'https://web.okjike.com') {
+    chrome.sidePanel.setOptions({
+      tabId,
+      path: 'pages/options.html',
+      enabled: true,
+    })
+  } else {
+    chrome.sidePanel.setOptions({
+      tabId,
+      enabled: false,
+    })
+  }
+})
+
+chrome.action.onClicked.addListener(() => {
+  if (!('sidebar' in chrome)) {
+    chrome.tabs.create({ url: chrome.runtime.getURL('pages/options.html') })
+    return
+  }
+
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0]
+
+    if (!tab.id) {
       return
     }
-
-    const url = new URL(tab.url)
-
-    await chrome.sidePanel.setPanelBehavior({
-      openPanelOnActionClick: true,
-    })
-
-    if (url.origin === 'https://web.okjike.com') {
-      await chrome.sidePanel.setOptions({
+    const tabId = tab.id
+    if (chrome.runtime.id) {
+      chrome.sidePanel.setOptions({
         tabId,
         path: 'pages/options.html',
         enabled: true,
       })
-    } else {
-      await chrome.sidePanel.setOptions({
-        tabId,
-        enabled: false,
-      })
     }
-  })()
-})
-
-chrome.action.onClicked.addListener(() => {
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const tab = tabs[0]
-
-    if (!('sidePanel' in chrome) || !tab.id) {
-      return
-    }
-    const tabId = tab.id
-
-    void (async () => {
-      if (chrome.runtime.id) {
-        await chrome.sidePanel.setOptions({
-          tabId,
-          path: 'pages/options.html',
-          enabled: true,
-        })
-      }
-
-      await chrome.sidePanel.open({ tabId })
-    })()
+    chrome.sidePanel.open({ tabId })
   })
 })

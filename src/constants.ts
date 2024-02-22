@@ -14,6 +14,9 @@ export const enum StorageKey {
 export const enum JIKE {
   Origin = 'https://web.okjike.com/',
   API = 'https://web.okjike.com/api/v2',
+  Author = 'https://web.okjike.com/u/29910575-F12D-4E48-9DDE-B25FE55D1F94',
+  Github = 'https://github.com/Leizhenpeng/jike-huang',
+  ChromeLink = 'https://chromewebstore.google.com/detail/%E9%BB%84%E5%90%89%E5%90%89/pejbpoekgakodijchbkjeogdcimpbejl',
 }
 
 export const enum Menu {
@@ -187,7 +190,7 @@ export const emoticons = [
 /** 关于扩展的超链接 */
 export const enum Links {
   /** 官网主页 */
-  Home = 'https://v2p.app',
+  Home = 'https://web.okjike.com/',
   /** 问题反馈页 */
   Feedback = 'https://github.com/coolpace/JIKE_Polish/discussions/1?sort=new',
   /** 主题图片分享页 */

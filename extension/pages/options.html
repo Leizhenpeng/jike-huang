@@ -13,10 +13,10 @@
 <body>
   <div class="layout">
     <div class="side collapsed">
-      <div class="side-header">
+      <button class="side-header" title="前往 Jike 网页版">
         <img src="../images/icon-32.png" />
-        <span class="side-header-title">黄吉吉-设置</span>
-      </div>
+        <span class="side-header-title">黄吉吉-设置面板</span>
+      </button>
 
       <div>
         <ul class="menu">
@@ -24,9 +24,9 @@
             <i class="menu-item-icon" data-lucide="settings"></i>
             <span class="menu-item-title">增强选项</span>
           </li>
-          <li data-menu-key="tags" class="menu-item">
-            <i class="menu-item-icon" data-lucide="tags"></i>
-            <span class="menu-item-title">用户标签</span>
+          <li data-menu-key="find-me" class="menu-link author">
+            <i class="menu-item-icon" data-lucide="at-sign"></i>
+            <span class="menu-item-title">谁是作者</span>
           </li>
         </ul>
       </div>
@@ -68,32 +68,6 @@
       <div data-content-key="tags"></div>
     </div>
   </div>
-
-  <template id="tags-empty">
-    <div class="tags-empty-block">
-      <div>
-        <div class="empty-tip">在用户个人信息弹框中，点击“添加用户标签”按钮以设置。</div>
-
-        <div class="empty-content">
-          <div class="avatar"></div>
-          <div class="userinfo">
-            <div class="userinfo-top">
-              <div class="userinfo-avatar"></div>
-              <div class="userinfo-lines">
-                <div style="width: 80px"></div>
-                <div style="width: 150px"></div>
-                <div style="width: 110px"></div>
-              </div>
-            </div>
-
-            <div class="userinfo-bottom">
-              <div class="userinfo-btn">添加用户标签</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </template>
 
   <script src="../scripts/jquery.min.js"></script>
   <script src="../scripts/options.min.js"></script>

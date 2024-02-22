@@ -31,6 +31,12 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--jike-color-main-100);
+    border-radius: 4px;
+  }
 }
 
 .side-header-title {
@@ -47,7 +53,7 @@ body {
   font-size: 14px;
 }
 
-.menu-item {
+.menu-item,.menu-link {
   display: flex;
   gap: 0 10px;
   align-items: center;
